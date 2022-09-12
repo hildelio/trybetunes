@@ -51,7 +51,7 @@ class Login extends Component {
             >
               Entrar
             </button>
-      </div>
+          </div>
         )}
         {isRedirecting && <Redirect to="/search" />}
       </Route>
