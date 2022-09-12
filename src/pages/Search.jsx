@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Loading from './Loading';
+import searchAlbumsAPI from '../services/searchAlbumsAPI';
 
 class Search extends Component {
   state = {
@@ -18,6 +19,17 @@ class Search extends Component {
       input: e.target.value,
       lastSearch: e.target.value,
     }, this.updateIsDisabled);
+  };
+
+  handleButton = async () => {
+    const { input } = this.state;
+    this.setState({ isLoading: true });
+    const albums = await searchAlbumsAPI(input);
+    this.setState({ isLoading: false, foundArtist: true });
+    this.setState({
+      input: '',
+      albums,
+    });
   };
 
   updateIsDisabled = () => {
